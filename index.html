@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E SPECIAL — 7月メルマガ確認</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  /* ─── ログイン画面 ─── */
+  #login-screen {
+    min-height: 100vh;
+    background: linear-gradient(175deg, #4A9DC4 0%, #A8D8EE 60%, #E8F6FD 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+  }
+  .login-box {
+    background: #fff;
+    padding: 48px 40px;
+    width: 360px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+    text-align: center;
+  }
+  .login-brand {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: #5A9EC0;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .login-title {
+    font-size: 20px;
+    letter-spacing: 0.12em;
+    color: #1E1A18;
+    margin-bottom: 32px;
+    font-family: "Hiragino Mincho ProN", serif;
+  }
+  .login-box label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: #888;
+    text-align: left;
+    margin-bottom: 6px;
+    margin-top: 16px;
+  }
+  .login-box input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #D8D0CC;
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+    color: #1E1A18;
+  }
+  .login-box input:focus { border-color: #5A9EC0; }
+  .login-btn {
+    margin-top: 28px;
+    width: 100%;
+    padding: 13px;
+    background: #4A9DC4;
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .login-btn:hover { background: #3A8DB4; }
+  .login-error {
+    margin-top: 14px;
+    font-size: 12px;
+    color: #C0504A;
+    display: none;
+  }
+
+  /* ─── メルマガ本体（ログイン後表示） ─── */
+  #content { display: none; }
+
+  body.authenticated #login-screen { display: none; }
+  body.authenticated #content { display: block; }
+
+  body {
+    font-family: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "YuMincho", serif;
+    color: #1E1A18;
+    -webkit-font-smoothing: antialiased;
+  }
+  #content {
+    background: linear-gradient(175deg, #4A9DC4 0%, #72BDD8 20%, #A8D8EE 50%, #CCEcF9 75%, #E8F6FD 100%);
+    min-height: 100vh;
+    padding: 32px 16px 80px;
+  }
+  .email-shell {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 2px 32px rgba(0,0,0,0.10);
+  }
+  .preheader {
+    background: #1A3550;
+    padding: 10px 24px;
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: #7AADCC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .preheader a { color: #A8D8EE; text-decoration: none; }
+  .email-header {
+    background: #fff;
+    padding: 32px 40px 24px;
+    border-bottom: 1px solid #EDE7E3;
+    text-align: center;
+  }
+  .brand-eyebrow {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: #5A9EC0;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .brand-name { font-size: 22px; font-weight: 400; letter-spacing: 0.18em; color: #1E1A18; }
+  .header-date {
+    margin-top: 8px;
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 11px; color: #B0A49E; letter-spacing: 0.06em;
+  }
+  .img-block img { display: block; width: 100%; height: auto; }
+  .text-section { padding: 36px 48px; }
+  .text-section.tight { padding: 28px 48px; }
+  .section-label {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 10px; letter-spacing: 0.2em; color: #5A9EC0;
+    text-transform: uppercase; margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after { content: ""; flex: 1; height: 1px; background: #EDE7E3; }
+  .section-heading {
+    font-size: 20px; font-weight: 600; line-height: 1.6;
+    letter-spacing: 0.04em; margin-bottom: 16px; text-wrap: balance; color: #1E1A18;
+  }
+  .section-body {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 13.5px; line-height: 2; color: #4A403C; letter-spacing: 0.03em;
+  }
+  .section-body p + p { margin-top: 12px; }
+  .divider { margin: 0 48px; height: 1px; background: #EDE7E3; }
+  .divider-blue { margin: 0; height: 3px; background: linear-gradient(90deg, #4A9DC4, #7BAED6 60%, transparent); }
+  .cta-text-area { padding: 32px 48px; text-align: center; }
+  .cta-text-area p {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 13px; color: #6A5C57; line-height: 1.9; margin-bottom: 20px; letter-spacing: 0.03em;
+  }
+  .email-footer { background: #1A3550; padding: 36px 40px; text-align: center; }
+  .footer-brand { font-size: 13px; letter-spacing: 0.18em; color: #A8D0E8; margin-bottom: 16px; }
+  .footer-links {
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 11px; color: #5888A4; letter-spacing: 0.06em; line-height: 2;
+  }
+  .footer-links a { color: #7AADCC; text-decoration: none; margin: 0 8px; }
+  .footer-copy {
+    margin-top: 20px;
+    font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 10px; color: #3D6480; letter-spacing: 0.05em;
+  }
+  .btn-area { text-align: center; padding: 0 48px 36px; }
+  .btn-primary {
+    display: inline-block; padding: 14px 40px; background: #4A9DC4;
+    color: #fff; font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 13px; letter-spacing: 0.12em; text-decoration: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- ログイン画面 -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-brand">Bijin Seizo Laboratory</div>
+    <div class="login-title">E SPECIAL</div>
+    <label>ID</label>
+    <input type="text" id="input-id" placeholder="ID を入力">
+    <label>パスワード</label>
+    <input type="password" id="input-pass" placeholder="パスワードを入力" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="login-btn" onclick="doLogin()">確認する</button>
+    <div class="login-error" id="login-error">IDまたはパスワードが正しくありません</div>
+  </div>
+</div>
+
+<!-- メルマガ本体 -->
+<div id="content">
+  <div class="email-shell">
+    <div class="preheader">
+      <span>E SPECIAL Newsletter ／ 2026年7月号</span>
+      <span>社内確認用</span>
+    </div>
+    <header class="email-header">
+      <div class="brand-eyebrow">Bijin Seizo Laboratory</div>
+      <div class="brand-name">E SPECIAL</div>
+      <div class="header-date">2026.07 Summer Skincare</div>
+    </header>
+
+    <div class="email-body">
+      <div class="img-block"><img src="./merumaga_01_hero.png" alt="7月の肌、くすんでいませんか？"></div>
+
+      <div class="text-section">
+        <div class="section-label">From E SPECIAL</div>
+        <h2 class="section-heading">7月、夏の肌が<br>一番ダメージを受ける季節です。</h2>
+        <div class="section-body">
+          <p>強い紫外線、汗と皮脂の混合、エアコンによる乾燥——。夏の肌は、見えないダメージを毎日蓄積しています。</p>
+          <p>「なんとなくくすんで見える」「テカリが気になるのに乾く」——そのサインを放置すると、秋に向けて肌荒れやシミとして現れることも。</p>
+          <p>今月は、夏の肌のリセットにフォーカスして、E SPECIALスキンクリアセラムをご紹介します。</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="text-section tight">
+        <div class="section-label">Skin Concern</div>
+        <h2 class="section-heading">なぜ、夏の肌はくすむのか。</h2>
+      </div>
+      <div class="img-block"><img src="./merumaga_02_nayami.png" alt="夏の肌、なぜくすむ？"></div>
+      <div class="text-section tight">
+        <div class="section-body">
+          <p>紫外線を浴びると肌はメラニンを生成し、ターンオーバーが乱れると古い角質が表面に残り続けます。汗や皮脂が角質に混ざると毛穴を詰まらせ、肌の透明感が失われていきます。</p>
+          <p>夏のくすみは、"汚れ"ではなく"蓄積"が原因。だからこそ、やさしくリセットするアプローチが重要です。</p>
+        </div>
+      </div>
+
+      <div class="divider-blue"></div>
+
+      <div class="text-section tight">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-heading">ダメージの連鎖を<br>断ち切る3ステップ。</h2>
+      </div>
+      <div class="img-block"><img src="./merumaga_03_hashi.png" alt="3ステップ図解"></div>
+      <div class="text-section tight">
+        <div class="section-body">
+          <p>スキンクリアセラムは、ドクターピールの考え方を日常ケアに落とし込んだ美容液です。毎晩のケアにプラスするだけで、夏の肌が少しずつリセットされていきます。</p>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="text-section tight">
+        <div class="section-label">Key Ingredients</div>
+        <h2 class="section-heading">衣理クリニック院長 Dr.ERIが<br>選んだ、3つの主役成分。</h2>
+      </div>
+      <div class="img-block"><img src="./merumaga_04_seibun.png" alt="皮膚科医開発の3つの成分"></div>
+      <div class="text-section tight">
+        <div class="section-body">
+          <p>AHA・BHA・13種オリゴペプチドを独自バランスで配合。角質ケアと保湿ケアを同時に行うことで、使い続けるほど肌のキメが整います。</p>
+        </div>
+      </div>
+
+      <div class="divider-blue"></div>
+
+      <div class="cta-text-area">
+        <p>7月中にお試しいただいた方限定で、<br>公式サイトにて特別価格にてご案内しております。</p>
+      </div>
+      <div class="img-block"><img src="./merumaga_05_cta.png" alt="7月の肌リセットを始める"></div>
+      <div class="cta-text-area" style="padding-top:24px;">
+        <p>ご不明な点はいつでもお気軽にお問い合わせください。</p>
+      </div>
+      <div class="btn-area">
+        <a class="btn-primary" href="#">スキンクリアセラムを見る →</a>
+      </div>
+    </div>
+
+    <footer class="email-footer">
+      <div class="footer-brand">E SPECIAL</div>
+      <div class="footer-links">
+        <a href="#">公式サイト</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">配信停止</a>
+      </div>
+      <div class="footer-copy">
+        © 2026 Bijin Seizo Laboratory. All rights reserved.<br>
+        このメールは E SPECIAL 会員様にお送りしています。
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script>
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+async function doLogin() {
+  const id = document.getElementById('input-id').value.trim();
+  const pass = document.getElementById('input-pass').value.trim();
+  const hash = await sha256(id + pass);
+  if (hash === 'dc6b329d7718a897e0c06aa0b0a8418099cd8b8e009ed8e876223e847f3fd83f') {
+    document.body.classList.add('authenticated');
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+</script>
+
+</body>
+</html>
